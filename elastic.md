@@ -1,16 +1,20 @@
+# Elastic
 
+## Управление потреблением памяти.
 
-В ElasticSearch 5 документация изменилась, что означает, что ни один из вышеперечисленных ответов не работал у меня.
+После установки по умолчанию Elastic у меня сразу съедал 2Gb памяти и остальным программам на виртуалке памяти просто не оставалось.  
+C ElasticSearch 5 документация изменилась.
 
-    Я попытался изменить ES_HEAP_SIZE в /etc/default/elasticsearch и в etc/init.d/elasticsearch, но когда я запустил ps aux | grep elasticsearch, результат все еще показывал:
+Изменение ES_HEAP_SIZE в /etc/default/elasticsearch и в etc/init.d/elasticsearch, не дают эффекта. Запуск ps aux | grep elasticsearch, показывал:
 
 `/usr/bin/java -Xms2g -Xmx2g # aka 2G min and max ram`
 
-Мне пришлось внести следующие изменения:
+Необхоидмо внести следующие изменения:
 
 `/etc/elasticsearch/jvm.options`
 
-```
+
+```python
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 
